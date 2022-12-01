@@ -65,4 +65,10 @@ public struct Model: Codable, Hashable {
 
     public var posts: [Post] = []
     public var imageReference: [ImageReference] = []
+
+
+    /// All non-deleted posts in reverse order (newest first)
+    public var publicPosts: [Post] {
+        posts.filter { !$0.deleted }.sorted(by: { $0.createdAt > $1.createdAt })
+    }
 }
